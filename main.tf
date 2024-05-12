@@ -1,3 +1,10 @@
+resource "aws_elasticache_subnet_group" "main" {
+  name       = "${var.name}-${var.env}-dsng"
+  subnet_ids = var.subnets
+
+  tags = merge(var.tags, {Name="${var.env}-sbg" })
+}
+
 resource "aws_security_group" "main" {
   name        = "${var.name}-${var.env}-sg"
   description = "${var.name}-${var.env}-sg"
@@ -22,16 +29,10 @@ resource "aws_security_group" "main" {
   tags = merge(var.tags, {Name="${var.env}-sg" })
 }
 
-resource "aws_elasticache_subnet_group" "main" {
-  name       = "${var.name}-${var.env}-dsng"
-  subnet_ids = var.subnets
-
-  tags = merge(var.tags, {Name="${var.env}-sbg" })
-}
-
 resource "aws_elasticache_parameter_group" "main" {
-  name = "${var.name}-${var.env}-dbpg"
-  family = "redis6.x"
+  name        = "${var.name}-${var.env}-pg"
+  description = "${var.name}-${var.env}-pg"
+  family      = "redis6.x"
   tags = merge(var.tags, {Name="${var.name}-${var.env}-ec-rpg" })
 }
 
