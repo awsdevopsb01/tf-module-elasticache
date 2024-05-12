@@ -30,7 +30,7 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_elasticache_parameter_group" "main" {
-  name        = "${var.name}-${var.env}-pg"
+  name        = "${var.name}-${var.env}-dbpg"
   description = "${var.name}-${var.env}-pg"
   family      = "redis6.x"
   tags = merge(var.tags, {Name="${var.name}-${var.env}-ec-rpg" })
