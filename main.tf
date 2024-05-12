@@ -15,13 +15,11 @@ resource "aws_security_group" "main" {
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
-    #  cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "${var.name}-${var.env}-sg"
-  }
+  tags = merge(var.tags, {Name="${var.env}-sg" })
 }
 
 resource "aws_elasticache_subnet_group" "main" {
